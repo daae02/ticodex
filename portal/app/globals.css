@@ -1,0 +1,500 @@
+/* Sistema visual de Ticodex — paleta Amity Square + reglas de pixel art.
+   Ver DISENO.md (fuente de verdad) y docs/mockups.html (referencia exacta de
+   clases). Nada de esquinas redondeadas, degradados ni emoji como ícono. */
+
+:root {
+  --white: #ffffff;
+  --cream: #ffffbf;
+  --lavender: #cfbfdf;
+  --chrome: #36365e;
+  --ink: #302040;
+  --green: #28b851;
+  --green-dark: #3d8472;
+  --accent: #ff4040;
+  --danger: #9f001f;
+  --warn: #bf7b3f;
+  --info: #2382c1;
+  --muted: #6f6080;
+
+  --font-body: "Segoe UI", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+}
+
+a {
+  color: var(--info);
+}
+
+img,
+svg.pixicon {
+  image-rendering: pixelated;
+}
+
+.pixel {
+  font-family: var(--font-press-start-2p), "Courier New", monospace;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+/* ---- primitivas pixel art ---- */
+
+.box {
+  background: var(--white);
+  border: 3px solid var(--ink);
+}
+.box.cream {
+  background: var(--cream);
+}
+.box.lavender {
+  background: var(--lavender);
+}
+
+.pixel-border {
+  border: 4px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  background: var(--white);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  padding: 10px 14px;
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  font-family: var(--font-press-start-2p), monospace;
+  text-decoration: none;
+  transition: transform 0.05s linear;
+}
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: none;
+}
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+}
+.btn-outline {
+  background: var(--white);
+  color: var(--ink);
+}
+.btn-accent {
+  background: var(--accent);
+  color: var(--white);
+}
+.btn-info {
+  background: var(--info);
+  color: var(--white);
+}
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 9px;
+}
+
+.chip {
+  font-size: 9px;
+  border: 2px solid var(--ink);
+  padding: 4px 8px;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  display: inline-block;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  border: 2px solid var(--ink);
+  padding: 3px 8px;
+  color: var(--white);
+  display: inline-block;
+}
+.badge-lc {
+  background: var(--green);
+}
+.badge-nt,
+.badge-vu {
+  background: var(--warn);
+}
+.badge-en,
+.badge-cr,
+.badge-ew,
+.badge-ex {
+  background: var(--danger);
+}
+.badge-dd {
+  background: var(--muted);
+}
+
+.status-pill {
+  font-size: 9px;
+  padding: 4px 9px;
+  border: 2px solid var(--ink);
+  font-weight: 700;
+  display: inline-block;
+}
+.status-pub {
+  background: var(--green);
+  color: var(--white);
+}
+.status-draft {
+  background: var(--white);
+  color: var(--ink);
+}
+.status-pending {
+  background: var(--warn);
+  color: var(--white);
+}
+
+.ok {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+.err {
+  color: var(--danger);
+  font-weight: 700;
+}
+.aviso {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+.pixicon {
+  fill: var(--ink);
+  flex: 0 0 auto;
+}
+.pixicon.on-white {
+  fill: var(--white);
+}
+.pixicon.danger {
+  fill: var(--danger);
+}
+.pixicon.green {
+  fill: var(--green-dark);
+}
+
+.diffbox {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.diffbox .campo {
+  color: var(--muted);
+  font-weight: 700;
+}
+.diffbox .old {
+  color: var(--danger);
+  text-decoration: line-through;
+}
+.diffbox .new {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+table.wtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+table.wtable th {
+  text-align: left;
+  color: var(--white);
+  background: var(--chrome);
+  font-weight: 700;
+  padding: 8px;
+  border: 2px solid var(--ink);
+}
+table.wtable td {
+  padding: 8px;
+  border: 2px solid var(--ink);
+  vertical-align: top;
+}
+
+/* ---- formularios ---- */
+
+label.campo-label {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--white);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 8px 10px;
+  width: 100%;
+}
+textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--info);
+  outline-offset: 1px;
+}
+
+/* Campo puntual marcado como faltante por el gate de publicación
+   (lib/especie/validate.ts) o la validación bilingüe — ver EspecieForm.tsx. */
+input.campo-error,
+textarea.campo-error,
+select.campo-error {
+  border-color: var(--danger);
+}
+input.campo-error:focus,
+textarea.campo-error:focus,
+select.campo-error:focus {
+  outline-color: var(--danger);
+}
+label.campo-label.campo-label-error {
+  color: var(--danger);
+}
+
+/* ---- layout de la app ---- */
+
+.topnav {
+  background: var(--chrome);
+  color: var(--white);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  border-bottom: 4px solid var(--ink);
+}
+.topnav .marca {
+  font-size: 12px;
+  color: var(--white);
+}
+.topnav nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.topnav nav a {
+  font-family: var(--font-press-start-2p), monospace;
+  font-size: 9px;
+  color: var(--white);
+  padding: 8px 12px;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+.topnav nav a:hover,
+.topnav nav a.activo {
+  border-color: var(--white);
+}
+.topnav .badge-pendientes {
+  background: var(--accent);
+  color: var(--white);
+  font-size: 8px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  border: 2px solid var(--ink);
+}
+
+main.contenido {
+  padding: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.tarjeta {
+  background: var(--white);
+  border: 4px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.tarjeta.cream {
+  background: var(--cream);
+}
+.tarjeta.lavender {
+  background: var(--lavender);
+}
+
+.fila {
+  display: flex;
+  gap: 12px;
+}
+.fila.espaciada {
+  justify-content: space-between;
+  align-items: center;
+}
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aviso-texto {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--font-body);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---- superficie pública (catálogo real: grid + ficha) ----
+   Ver PROYECTO.md §2.1 / DISENO.md "Dónde aplica". Misma paleta y reglas
+   pixel art que el panel — solo se agregan las piezas de layout que el
+   panel no tenía (grid de tarjetas, toggle de idioma, pie de página). */
+
+.lang-toggle {
+  display: inline-flex;
+  border: 2px solid var(--white);
+}
+.lang-toggle-opcion {
+  font-family: var(--font-press-start-2p), monospace;
+  font-size: 8px;
+  color: var(--white);
+  background: transparent;
+  border: 0;
+  padding: 6px 9px;
+  cursor: pointer;
+}
+.lang-toggle-opcion.activo {
+  background: var(--green);
+}
+
+.public-footer {
+  background: var(--chrome);
+  color: var(--white);
+  border-top: 4px solid var(--ink);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+}
+/* Link de acceso al panel: visible pero deliberadamente discreto — texto
+   chico, sin ícono, sin color de acento fuerte. */
+.public-footer-login {
+  color: var(--white);
+  opacity: 0.6;
+  font-size: 10px;
+  text-decoration: underline;
+}
+.public-footer-login:hover {
+  opacity: 1;
+}
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.especie-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--white);
+  color: var(--ink);
+  text-decoration: none;
+}
+.especie-card.cream {
+  background: var(--cream);
+}
+.especie-card.lavender {
+  background: var(--lavender);
+}
+.especie-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.especie-card-thumb {
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--ink);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.especie-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.especie-card-nombre {
+  font-weight: 700;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.especie-card-cientifico {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ficha-fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+.ficha-foto-slot {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--white);
+}
+.ficha-foto-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

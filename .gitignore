@@ -1,0 +1,33 @@
+# Node / Next.js (portal)
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+!.env.example
+
+# Flutter/Dart (mobile)
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+mobile/build/
+mobile/.idea/
+mobile/*.iml
+mobile/android/app/debug
+mobile/android/app/profile
+mobile/android/app/release
+
+# OS / editor
+.DS_Store
+.vscode/
+*.log
+
+# Vercel / Claude runtime
+.vercel
+.claude/scheduled_tasks.lock
+
+# Excluidos del repo publico
+WhatsApp Ptt 2026-08-07 at 5.48.01 PM.ogg
+TEST_PLAN.md
