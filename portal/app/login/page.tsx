@@ -5,9 +5,9 @@ export const metadata = { title: "Ingresar — Ticodex Panel" }
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ redirectTo?: string }>
+  searchParams: Promise<{ redirectTo?: string; error?: string }>
 }) {
-  const { redirectTo } = await searchParams
+  const { redirectTo, error } = await searchParams
 
   return (
     <div
@@ -31,6 +31,7 @@ export default async function LoginPage({
         <h1 className="pixel" style={{ fontSize: 16 }}>
           TICODEX PANEL
         </h1>
+        {error && <p className="err">{error}</p>}
         <LoginForm redirectTo={redirectTo ?? "/especies"} />
       </div>
     </div>

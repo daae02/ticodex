@@ -1,19 +1,27 @@
 "use client"
 
 import { useActionState } from "react"
-import { iniciarSesionAction, type EstadoLogin } from "./actions"
+import { solicitarRecuperacionAction, type EstadoOlvide } from "./actions"
 
-const ESTADO_INICIAL: EstadoLogin = {}
+const ESTADO_INICIAL: EstadoOlvide = {}
 
-export function LoginForm({ redirectTo }: { redirectTo: string }) {
+export function OlvideForm() {
   const [estado, formAction, enCurso] = useActionState(
-    iniciarSesionAction,
+    solicitarRecuperacionAction,
     ESTADO_INICIAL
   )
 
+  if (estado.ok) {
+    return (
+      <p className="ok" style={{ textAlign: "center", maxWidth: 260 }}>
+        Si el correo tiene una cuenta, te enviamos un enlace para restablecer
+        la contraseña.
+      </p>
+    )
+  }
+
   return (
     <form action={formAction} className="stack" style={{ width: 260 }}>
-      <input type="hidden" name="redirectTo" value={redirectTo} />
       <div className="columna">
         <label className="campo-label" htmlFor="email">
           Correo
@@ -27,19 +35,6 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
           required
         />
       </div>
-      <div className="columna">
-        <label className="campo-label" htmlFor="password">
-          Contraseña
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          placeholder="••••••••"
-          required
-        />
-      </div>
       {estado.error && <p className="err">{estado.error}</p>}
       <button
         type="submit"
@@ -47,13 +42,10 @@ export function LoginForm({ redirectTo }: { redirectTo: string }) {
         disabled={enCurso}
         style={{ width: "100%" }}
       >
-        {enCurso ? "INGRESANDO..." : "INGRESAR"}
+        {enCurso ? "ENVIANDO..." : "ENVIAR ENLACE"}
       </button>
       <p className="aviso-texto" style={{ textAlign: "center" }}>
-        <a href="/login/olvide">¿Olvidaste tu contraseña?</a>
-      </p>
-      <p className="aviso-texto" style={{ textAlign: "center" }}>
-        Acceso restringido al equipo interno
+        <a href="/login">Volver a ingresar</a>
       </p>
     </form>
   )
